@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const HomePage = require('../pages/HomePage');
+const { ECDH } = require('node:crypto');
 
 test.describe('Price filter feature', () => {
 
@@ -20,6 +21,8 @@ test.describe('Price filter feature', () => {
         await expect(homePage.priceFilterMin).toHaveAttribute('aria-valuenow', '50');
 
         await expect(homePage.priceFilterMax).toHaveAttribute('aria-valuenow', '100');
+
+        await homePage.waitForProduct('Sheet Sander');
 
         const prices = await homePage.getProductPrices();
 

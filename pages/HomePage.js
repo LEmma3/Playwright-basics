@@ -1,3 +1,5 @@
+const { expect } = require('@playwright/test');
+
 class HomePage {
 
     constructor(page) {
@@ -61,12 +63,17 @@ class HomePage {
         await this.searchInput.press('Enter');
     }
 
-  async openProductByName(productName) {
+    async openProductByName(productName) {
     await this.page
       .locator('[data-test="product-name"]', { hasText: productName })
       .first()
       .click();
-  }
+    }
+
+  async waitForProduct(productName) {
+    const product = this.page.locator(`//h5[normalize-space()="${productName}"]`);
+    await expect(product).toBeVisible();
+    }
 }
 
 module.exports = HomePage;

@@ -44,8 +44,7 @@ test.describe('Add to favourites feature', () => {
         await homePage.menuButton.click();
         await homePage.myFavoritesLink.click();
 
-        await expect(
-        page.locator('[data-test="product-name"]', { hasText: 'Thor Hammer' })
-        ).toBeVisible();
+        await expect(favoritesPage.favoriteItems).toHaveText('Thor Hammer');
+
     });
 });
